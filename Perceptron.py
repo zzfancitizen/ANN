@@ -33,8 +33,8 @@ class Perceptron(object):
         print(self.weights)
 
 
-def relu(x):
-    return x if x > 0 else 0
+def f(x):
+    return 1 if x > 0 else 0
 
 
 def get_training_dataset():
@@ -50,9 +50,9 @@ def get_training_dataset():
 
 
 def train_and_perceptron():
-    p = Perceptron(2, relu)
+    p = Perceptron(2, f)
     input_vecs, labels = get_training_dataset()
-    p.train(input_vecs, labels, 10000, 0.1)
+    p.train(input_vecs, labels, 10, 0.1)
     return p
 
 if __name__ == '__main__':
