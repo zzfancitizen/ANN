@@ -29,12 +29,16 @@ class Perceptron(object):
         self.weights = self.weights + rate * delta * np.reshape(input_vec, (len(input_vec), 1))
         self.bias += rate * delta
 
+    def print_weight(self):
+        print(self.weights)
+
 
 def relu(x):
     return x if x > 0 else 0
 
 
 def get_training_dataset():
+
     raw_vecs = [[1,1], [0,0], [1,0], [0,1]]
     size_vecs = len(raw_vecs)
     input_vecs = np.reshape(raw_vecs, (size_vecs, 2))
@@ -48,12 +52,10 @@ def get_training_dataset():
 def train_and_perceptron():
     p = Perceptron(2, relu)
     input_vecs, labels = get_training_dataset()
-    p.train(input_vecs, labels, 1000, 0.1)
+    p.train(input_vecs, labels, 10000, 0.1)
     return p
 
 if __name__ == '__main__':
     and_perception = train_and_perceptron()
-    print(and_perception.predict(np.reshape([1, 1], (1, 2)))[0][0])
-    print('0 and 0 = %d' % and_perception.predict(np.reshape([1, 0], (1, 2)))[0][0])
-    print('1 and 0 = %d' % and_perception.predict(np.reshape([0, 0], (1, 2)))[0][0])
-    print('0 and 1 = %d' % and_perception.predict(np.reshape([0, 1], (1, 2)))[0][0])
+    print(and_perception.predict(np.reshape([1, 0], (1, 2))))
+    print(and_perception.print_weight())
