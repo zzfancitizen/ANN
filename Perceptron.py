@@ -53,9 +53,7 @@ def train_and_perceptron():
 
 if __name__ == '__main__':
     and_perception = train_and_perceptron()
-    print(and_perception.predict(np.reshape([1,0], (1, 2)))[0][0])
-    # print (and_perception)
-    # print ('1 and 1 = %d' % and_perception.predict([1, 1]))
-    # print ('0 and 0 = %d' % and_perception.predict([0, 0]))
-    # print ('1 and 0 = %d' % and_perception.predict([1, 0]))
-    # print ('0 and 1 = %d' % and_perception.predict([0, 1]))
+    print(and_perception.predict(np.reshape([1, 1], (1, 2)))[0][0])
+    print('0 and 0 = %d' % and_perception.predict(np.reshape([1, 0], (1, 2)))[0][0])
+    print('1 and 0 = %d' % and_perception.predict(np.reshape([0, 0], (1, 2)))[0][0])
+    print('0 and 1 = %d' % and_perception.predict(np.reshape([0, 1], (1, 2)))[0][0])
