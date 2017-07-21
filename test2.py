@@ -1,3 +1,13 @@
 import numpy as np
 
-print(np.zeros((3, 1)))
+class a(object):
+    def __init__(self, a):
+        self.a = a
+
+A = a(1)
+
+b = []
+
+b.append(A)
+
+print(b[0].a)
