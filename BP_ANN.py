@@ -1,5 +1,9 @@
 import numpy as np
+import math
 
+
+def sigmod(x):
+    return 1 / (1 + math.e ^ x)
 
 
 class Node(object):
@@ -27,6 +31,6 @@ class Node(object):
         for i in range(len(self.upstream)):
             conn.output.append(self.upstream[i].upstream_node.output)
             conn.weight.append(self.upstream[i].weight)
-        output = np.reshape(conn.output, (1, len(conn.output))).dot(np.reshape(conn.weight, (len(conn.weight), 1)))
+        output = sigmod(np.reshape(conn.output, (1, len(conn.output))).dot(np.reshape(conn.weight, (len(conn.weight), 1))))
 
 
