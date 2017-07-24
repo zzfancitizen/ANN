@@ -1,36 +1,71 @@
-import numpy as np
-import math
+import Numpy as np
 
 
-def sigmod(x):
-    return 1 / (1 + math.e ^ x)
+class FullConnectedLayer(object):
+    def __init__(self, input_size, output_size, activator):
+        self.input_size = input_size
+        self.output_size = output_size
+        self.activator = activator
+        self.W = np.random.uniform(-0.1, 0.1, (output_size, input_size))
+        self.b = np.zeros((output_size, 1))
+        self.output = np.zeros((output_size, 1))
+
+    def forward(self, input_array):
+        self.input = input_array
+        self.output = self.activator.foward(np.dot(self.W, input_array) + self.b)
+
+    def backward(self, delta_array):
+        self.delta = self.activator.backward(self.input) * np.dot(self.W.T, delta_array)
+        self.W_grad = np.dot(delta_array, self.input.T)
+        self.b_grad = delta_array
+
+    def update(self, learning_rate):
+        self.W += learning_rate * self.W_grad
+        self.b += learning_rate * self.b_grad
 
 
-class Node(object):
-    def __init__(self, layer_index, node_index):
-        self.layer_index = layer_index
-        self.node_index = node_index
-        self.downstream = []
-        self.upstream = []
-        self.output = 0
-        self.delta = 0
+class Sigmod(object):
+    def forward(self, weighted_input):
+        return 1.0 / (1.0 + np.exp(-weighted_input))
 
-    def set_output(self, output):
-        self.output = output
-
-    def append_downstream_connection(self, conn):
-        self.downstream.append(conn)
-
-    def append_upstream_connection(self, conn):
-        self.upstream.append(conn)
-
-    def calc_output(self):
-        conn = {}
-        conn.output = []
-        conn.weight = []
-        for i in range(len(self.upstream)):
-            conn.output.append(self.upstream[i].upstream_node.output)
-            conn.weight.append(self.upstream[i].weight)
-        output = sigmod(np.reshape(conn.output, (1, len(conn.output))).dot(np.reshape(conn.weight, (len(conn.weight), 1))))
+    def backward(self, output):
+        return output * (1 - output)
 
 
+class Network(object):
+    def __init__(self, layers):
+        self.layers = []
+        for i in range(len(layers) - 1):
+            self.layers.append(
+                FullConnectedLayer(layers[i], layers[i+1], Sigmod())
+            )
+
+    def predict(self, sample):
+        output = sample
+        for layer in self.layers:
+            layer.forward(output)
+            output = layer.output
+        return output
+
+    def train(self, labels, data_set, rate, epoch):
+        for i in range(epoch):
+            for d in range(len(data_set)):
+                self.train_one_sample(labels[d], data_set[d], rate)
+
+    def train_one_sample(self, label, data_set, rate):
+        self.predict(data_set)
+        self.calc_gradient(label)
+        self.update_weight(rate)
+
+    def calc_gradient(self, label):
+        delta = self.layers[-1].activator.backward(
+            self.layers[-1].output
+        ) * (label - self.layers[-1].output)
+        for layer in self.layers[::-1]:
+            layer.backward(delta)
+            delta = layer.delta
+        return delta
+
+    def update_weight(self, rate):
+        for layer in self.layers:
+            layer.update(rate)
