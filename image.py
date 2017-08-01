@@ -25,5 +25,6 @@ print(img)
 print(img.shape, img.dtype)
 
 plt.imshow(img)
+# plt.ion()
 plt.show()
 
