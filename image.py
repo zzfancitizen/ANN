@@ -1,7 +1,7 @@
 import cv2
-from scipy import ndimage
-from scipy import misc
-# from PIL import Image
+# from scipy import ndimage
+# from scipy import misc
+# # from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import keras
@@ -18,7 +18,7 @@ from keras.datasets import cifar10
 # plt.imshow(X_train_cf[2, :, :])
 # plt.show()
 
-img = cv2.imread("/Users/zhangzhifan/Desktop/pika.jpeg")
+img = cv2.imread("C:\\Users\\zzfancitizen\\Desktop\\pika.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 print(img)
