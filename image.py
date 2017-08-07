@@ -18,7 +18,8 @@ import matplotlib.pyplot as plt
 # plt.imshow(X_train_cf[2, :, :])
 # plt.show()
 
-img = cv2.imread("C:\\Users\\zzfancitizen\\Desktop\\pika.jpg")
+# img = cv2.imread("C:\\Users\\zzfancitizen\\Desktop\\pika.jpg")
+img = cv2.imread("C:\\Users\\i072179\\Desktop\\pika.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 print(img)
