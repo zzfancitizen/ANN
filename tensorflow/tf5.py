@@ -50,23 +50,23 @@ with tf.Session() as sess:
     merged = tf.summary.merge_all()
     writer = tf.summary.FileWriter("..\\logs", sess.graph)
 
-    # fig = plt.figure()
-    # ax = fig.add_subplot(1, 1, 1)
-    # ax.scatter(x_data, y_data)
-    # plt.ion()
-    # plt.show()
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.scatter(x_data, y_data)
+    plt.ion()
+    plt.show()
 
     for i in range(10000):
         sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
         if i % 50 == 0:
-            # print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
+            print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
             prediction_value = sess.run(prediction, feed_dict={xs: x_data})
             result = sess.run(merged, feed_dict={xs: x_data, ys: y_data})
             writer.add_summary(result, i)
-            # try:
-            #     ax.lines.remove(lines[0])
-            # except Exception:
-            #     pass
-            # lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
-            # plt.pause(0.1)
+            try:
+                ax.lines.remove(lines[0])
+            except Exception:
+                pass
+            lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
+            plt.pause(0.1)
 
