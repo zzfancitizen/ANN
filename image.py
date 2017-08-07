@@ -23,9 +23,9 @@ img = cv2.imread("C:\\Users\\i072179\\Desktop\\pika.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 print(img)
-print(img.shape, img.dtype)
+print(img[1:2, 1:2, :].shape, img.dtype)
 
-plt.imshow(img)
+plt.imshow(img[1:2, 1:2, :])
 # plt.ion()
 plt.show()
 

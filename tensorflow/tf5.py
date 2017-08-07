@@ -29,7 +29,7 @@ prediction = add_layer(l1, 10, 1, activation_function=None)
 
 loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction), reduction_indices=[1]))
 
-train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
+train_step = tf.train.AdamOptimizer(0.1).minimize(loss)
 
 init = tf.initialize_all_variables()
 
@@ -37,7 +37,7 @@ with tf.Session() as sess:
     sess.run(init)
 
     fig = plt.figure()
-    ax = fig.add_subplot(1,1,1)
+    ax = fig.add_subplot(1, 1, 1)
     ax.scatter(x_data, y_data)
     plt.ion()
     plt.show()
