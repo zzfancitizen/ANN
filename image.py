@@ -19,13 +19,13 @@ import matplotlib.pyplot as plt
 # plt.show()
 
 # img = cv2.imread("C:\\Users\\zzfancitizen\\Desktop\\pika.jpg")
-img = cv2.imread("C:\\Users\\i072179\\Desktop\\pika.jpg")
+img = cv2.imread("/Users/zhangzhifan/Desktop/pika.jpeg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 print(img)
-print(img[1:2, 1:2, :].shape, img.dtype)
+print(img.shape, img.dtype)
 
-plt.imshow(img[1:2, 1:2, :])
+plt.imshow(img)
 # plt.ion()
 plt.show()
 
