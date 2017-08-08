@@ -1,7 +1,8 @@
 import cv2
 
 
-img = cv2.imread('/Users/zhangzhifan/Desktop/plate4.jpg')
+# img = cv2.imread('/Users/zhangzhifan/Desktop/plate4.jpg')
+img = cv2.imread('C:\\Users\\zzfancitizen\\Desktop\\plate4.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 gaussian = cv2.GaussianBlur(gray, (3, 3), 0, 0, cv2.BORDER_DEFAULT)
