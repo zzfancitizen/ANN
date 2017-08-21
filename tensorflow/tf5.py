@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 # in_size 输入数 out_size 该层节点数
 
@@ -68,5 +69,6 @@ with tf.Session() as sess:
             except Exception:
                 pass
             lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
+            # plt.savefig(os.path.abspath('../material') + os.path.sep + 'image_' + str(i) + '.png')
             plt.pause(0.1)
 
