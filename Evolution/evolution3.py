@@ -22,7 +22,7 @@ class GA(object):
 
         self.pop = np.vstack([np.random.permutation(DNA_size) for _ in range(pop_size)])
 
-    def translateDNA(self, DNA, city_position):     # get cities' coord in order
+    def translateDNA(self, DNA, city_position):  # get cities' coord in order
         line_x = np.empty_like(DNA, dtype=np.float64)
         line_y = np.empty_like(DNA, dtype=np.float64)
         for i, d in enumerate(DNA):
@@ -44,9 +44,9 @@ class GA(object):
 
     def crossover(self, parent, pop):
         if np.random.rand() < self.cross_rate:
-            i_ = np.random.randint(0, self.pop_size, size=1)                        # select another individual from pop
-            cross_points = np.random.randint(0, 2, self.DNA_size).astype(np.bool)   # choose crossover points
-            keep_city = parent[~cross_points]                                       # find the city number
+            i_ = np.random.randint(0, self.pop_size, size=1)  # select another individual from pop
+            cross_points = np.random.randint(0, 2, self.DNA_size).astype(np.bool)  # choose crossover points
+            keep_city = parent[~cross_points]  # find the city number
             swap_city = np.setdiff1d(pop[i_, :], keep_city)
             parent[:] = np.concatenate((keep_city, swap_city))
         return parent
@@ -92,7 +92,7 @@ for generation in range(N_GENERATIONS):
     fitness, total_distance = ga.get_fitness(lx, ly)
     ga.evolve(fitness)
     best_idx = np.argmax(fitness)
-    print('Gen:', generation, '| best fit: %.2f' % fitness[best_idx],)
+    print('Gen:', generation, '| best fit: %.2f' % fitness[best_idx], )
 
     env.plotting(lx[best_idx], ly[best_idx], total_distance[best_idx])
 
