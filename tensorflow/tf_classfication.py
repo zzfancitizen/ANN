@@ -16,6 +16,7 @@ def add_layer(inputs, in_size, out_size, activation_function=None):
     return outputs
 
 
+
 # calculate accuracy
 def compute_accuracy(v_xs, v_ys):
     global prediction
