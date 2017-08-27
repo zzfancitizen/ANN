@@ -1,3 +1,6 @@
 logs
 material
 tensorflow/MNIST_data
+.idea/dictionaries/
+.idea/workspace.xml
+__pycache__/
